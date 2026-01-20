@@ -1,0 +1,47 @@
+name: Release to prod
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+
+      - name: Install clasp
+        run: npm install -g @google/clasp@3
+
+      - name: Install jq
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq
+
+      - name: Restore clasp credentials
+        run: echo '${{ secrets.CLASPRC_SECRET }}' > ~/.clasprc.json
+
+      - name: List files to push
+        run: |
+          cd src
+          find .
+
+      - name: Update .clasp.json with SCRIPT_ID
+        run: |
+          jq --arg scriptId "${{ vars.SCRIPT_ID_PROD }}" \
+            '.scriptId = $scriptId' \
+            .clasp.json > /tmp/.clasp.json
+          mv /tmp/.clasp.json .clasp.json
+
+      - name: Push script
+        run: clasp push -f
+
+      - name: Add Apps Script link to run summary
+        run: |
+          SCRIPT_ID=$(jq -r '.scriptId' .clasp.json)
+          echo "### Apps Script project" >> $GITHUB_STEP_SUMMARY
+          echo "- Open project: https://script.google.com/d/${SCRIPT_ID}/edit" >> $GITHUB_STEP_SUMMARY
