@@ -3,6 +3,7 @@
 ### Functionality to add from old script: 
 - [ ] corrections logic
 - [ ] check for incomplete responses and send the email
+- [ ] refactor constants so email and form url aren't hardcoded
 
 ### Quick / Essential adds: 
 - [ ] refactor code so the flow makes more sense
