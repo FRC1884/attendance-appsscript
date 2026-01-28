@@ -4,7 +4,6 @@
 
 // Add an entry to the process sheet
 function addProcessEntry(processSheet, processLastRow, cleanData, isIn) {
-  console.log('addProcessEntry');
   const nextRow = processLastRow + 1;
 
   console.log(`logged in ${cleanData['Name']} at ${cleanData['Timestamp']}`);
@@ -71,7 +70,6 @@ function findAllSessions(processSheet, name, date, checkExtended) {
 
 // check if a session is valid
 function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
-  console.log('checkSessionValidity');
   for (const session of sessions) {
     let hour = new Date(cleanData['Timestamp']).getHours();
 
@@ -92,8 +90,6 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
     }
 
     processSheet.getRange(session, c.PROCESS_EXTRA_COL_TWO).setFormula(formula);
-
-    console.log('got here');
 
     let difference = processSheet.getRange(session, c.PROCESS_EXTRA_COL_TWO).getDisplayValue();
     let isNegative = difference.trim().startsWith("-");
