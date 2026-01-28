@@ -4,25 +4,23 @@
 
 // Add an entry to the process sheet
 function addProcessEntry(processSheet, processLastRow, cleanData, isIn) {
-  console.log('addProcessEntry');
-  const next_row = processLastRow + 1;
+  const nextRow = processLastRow + 1;
 
   console.log(`logged in ${cleanData['Name']} at ${cleanData['Timestamp']}`);
 
-  const startCell = `${columnToLetter(c.PROCESS_START_COL)}${next_row}`;
-  const endCell = `${columnToLetter(c.PROCESS_END_COL)}${next_row}`;
+  const startCell = `${columnToLetter(c.PROCESS_START_COL)}${nextRow}`;
+  const endCell = `${columnToLetter(c.PROCESS_END_COL)}${nextRow}`;
   const lenFormula = `=IF(AND(${startCell}<>"", ${endCell}<>""), ${endCell}-${startCell}, "")`;
-  console.log(lenFormula);
 
-  processSheet.getRange(next_row, c.PROCESS_NAME_COL).setValue(cleanData['Name']);
-  processSheet.getRange(next_row, c.PROCESS_DATE_COL).setValue(cleanData['date']).setNumberFormat(c.DATE_FORMAT);
-  processSheet.getRange(next_row, c.PROCESS_LEN_COL).setFormula(lenFormula);
-  processSheet.getRange(next_row, c.PROCESS_STATUS_COL).setValue(c.SessionStatus.Pending);
+  processSheet.getRange(nextRow, c.PROCESS_NAME_COL).setValue(cleanData['Name']);
+  processSheet.getRange(nextRow, c.PROCESS_DATE_COL).setValue(cleanData['date']).setNumberFormat(c.DATE_FORMAT);
+  processSheet.getRange(nextRow, c.PROCESS_LEN_COL).setFormula(lenFormula);
+  processSheet.getRange(nextRow, c.PROCESS_STATUS_COL).setValue(c.SessionStatus.Pending);
 
   if (isIn) {
-    processSheet.getRange(next_row, c.PROCESS_START_COL).setValue(cleanData['time']);
+    processSheet.getRange(nextRow, c.PROCESS_START_COL).setValue(cleanData['time']);
   } else {
-    processSheet.getRange(next_row, c.PROCESS_END_COL).setValue(cleanData['time']);
+    processSheet.getRange(nextRow, c.PROCESS_END_COL).setValue(cleanData['time']);
   }
 }
 
@@ -72,7 +70,6 @@ function findAllSessions(processSheet, name, date, checkExtended) {
 
 // check if a session is valid
 function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
-  console.log('checkSessionValidity');
   for (const session of sessions) {
     let hour = new Date(cleanData['Timestamp']).getHours();
 
@@ -80,7 +77,7 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
     if (hour < 6) {
       continue;
     }
-    // session length is not negative 
+    // session length is not negative
     processSheet.getRange(session, c.PROCESS_EXTRA_COL_ONE).setValue(cleanData['time']);
     const startCell = `${columnToLetter(c.PROCESS_START_COL)}${session}`;
     const endCell = `${columnToLetter(c.PROCESS_END_COL)}${session}`;
@@ -91,10 +88,8 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
     } else {
       formula = `=${extraCell}-${startCell}`;
     }
-    
-    processSheet.getRange(session, c.PROCESS_EXTRA_COL_TWO).setFormula(formula);
 
-    console.log('got here');
+    processSheet.getRange(session, c.PROCESS_EXTRA_COL_TWO).setFormula(formula);
 
     let difference = processSheet.getRange(session, c.PROCESS_EXTRA_COL_TWO).getDisplayValue();
     let isNegative = difference.trim().startsWith("-");

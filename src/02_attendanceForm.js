@@ -1,19 +1,18 @@
 /**
- * This code evaluates when the attendance form is submitted. 
+ * This code evaluates when the attendance form is submitted.
  */
 
 function evaluateAttendanceFormSubmission(formData) {
-  console.log('evaluateAttendanceFormSubmission');
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const processSheet = ss.getSheetByName(c.PROCESS_SHEET);
   const processLastRow = processSheet.getRange(c.PROCESS_LAST_ROW_CELL[0], c.PROCESS_LAST_ROW_CELL[1]).getValue();
-  
+
   const cleanData = {};
   for (const key in formData) {
-    cleanData[key] = formData[key][0]
+    cleanData[key] = formData[key][0];
   }
   const timeAsDate = new Date(cleanData['Timestamp']);
-  cleanData['time'] = Utilities.formatDate(timeAsDate, c.TIMEZONE, 'HH:mm');;
+  cleanData['time'] = Utilities.formatDate(timeAsDate, c.TIMEZONE, 'HH:mm');
   cleanData['date'] = timeAsDate;
   const submittedInOut = cleanData['IN/OUT'];
 
@@ -26,15 +25,12 @@ function evaluateAttendanceFormSubmission(formData) {
 
 // process when a person checks in
 function checkIn(processSheet, cleanData, processLastRow) {
-  console.log('checkIn');
   addProcessEntry(processSheet, processLastRow, cleanData, true);
 }
 
 // process when a person checks out
 function checkOut(processSheet, cleanData, processLastRow) {
-  console.log('checkOut');
   const sessions = findAllSessions(processSheet, cleanData['Name'], cleanData['date'], false);
-  console.log('made it past findallsessions');
 
   // they forgot to sign in
   if (sessions.length === 0) {
@@ -49,5 +45,5 @@ function checkOut(processSheet, cleanData, processLastRow) {
     updateProcessEntry(processSheet, cleanData, validSessionRow, false)
   } else {
     emailError('checkOut failed', cleanData['time'], cleanData);
-  }  
+  }
 }
