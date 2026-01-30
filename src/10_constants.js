@@ -30,6 +30,7 @@ var c = {
 
   // specific cells and columns in sheets 
   PROCESS_LAST_ROW_CELL: [1, 12],
+  PROCESS_LAST_CONFIRMED_CELL: [1, 10],
   PROCESS_NAME_COL: 1,
   PROCESS_DATE_COL: 2,
   PROCESS_START_COL: 3,
@@ -46,5 +47,8 @@ var c = {
 
   TIMEZONE: 'Europe/London',
   DATE_FORMAT: 'dd/MM/yy',
-  DURATION_FORMAT: 'HH:mm'
+  DURATION_FORMAT: 'HH:mm',
+  DATE_TIME_FORMAT: 'dd/MM HH:mm',
+
+  TIMEOUT_VALUE: 1000*60*60*23 // 23 hours
 }
