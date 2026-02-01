@@ -18,7 +18,7 @@ function emailError(err, context, info) {
 }
 
 // Email specified person specified body
-function emailStudent(emailSubject, emailBody, name) {
+function emailStudent(name, emailSubject, emailBody) {
   let emailAddress = getEmailAddress(name);
 
   GmailApp.sendEmail(

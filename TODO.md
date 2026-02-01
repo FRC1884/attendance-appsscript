@@ -1,12 +1,6 @@
 # TODO
 
-### Functionality to add from old script: 
-- [ ] corrections logic
-- [ ] check for incomplete responses and send the email
-- [ ] refactor constants so email and form url aren't hardcoded
-
 ### Quick / Essential adds: 
-- [ ] refactor code so the flow makes more sense
 - [ ] add session length calculator to menu
 - [ ] add information to readme about how to update year on year
 
@@ -20,7 +14,4 @@
 - [ ] check for incomplete session before adding new start time
 - [ ] add session status (preseason, kickoff, build season, etc.)
 - [ ] change to use ts instead of js
-- [ ] add triggers through code 
 - [ ] refactor ci to push to prod upon merge with main
-
-

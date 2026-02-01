@@ -11,3 +11,12 @@ function createOnFormSubmitTrigger() {
     .onFormSubmit()
     .create();
 }
+
+// This trigger happens every day between 7-8am
+function createIncompleteResponseCheckTrigger() {
+  ScriptApp.newTrigger('attemptToCheckResponses')
+    .timeBased()
+    .atHour(7)
+    .everyDays(1)
+    .create();
+}

@@ -5,6 +5,8 @@
 function onOpen(e) {
   const menu = SpreadsheetApp.getUi().createMenu('Attendance');
   menu
-    .addItem('createOnFormSubmitTrigger', 'createOnFormSubmitTrigger')
+    .addItem('attemptToCheckResponses', 'attemptToCheckResponses')
+    .addItem('create trigger: on form submit', 'createOnFormSubmitTrigger')
+    .addItem('create trigger: timebased check for incomplete', 'createIncompleteResponseCheckTrigger')
     .addToUi();
 }

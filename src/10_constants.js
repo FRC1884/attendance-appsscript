@@ -7,8 +7,6 @@ var c = {
   TEAM_SHEET: 'Team',
   PROCESS_SHEET: 'Process',
 
-  // NOTE: this is the prod form url, not dev
-  CORRECTIONS_FORM_URL: 'https://forms.gle/8npSN7TMSbzuE7BX8',
   ERROR_EMAIL: 'mackensiesemail@gmail.com',
   EMAIL_SENDER: 'ASL Robotics',
 
@@ -45,10 +43,13 @@ var c = {
   TEAM_NAME_COL: 1,
   TEAM_EMAIL_COL: 3,
 
+  // date formatting
   TIMEZONE: 'Europe/London',
-  DATE_FORMAT: 'dd/MM/yy',
+  DATE_FORMAT: 'MM/dd/yy',
   DURATION_FORMAT: 'HH:mm',
-  DATE_TIME_FORMAT: 'dd/MM HH:mm',
+  DATE_TIME_FORMAT: 'MM/dd HH:mm',
+  DATE_WEEKDAY_FORMAT: 'EEEEE, MMM d',
+  DATE_GOOGLE_FORM_FORMAT: 'yyyy-MM-dd',
 
   TIMEOUT_VALUE: 1000*60*60*23 // 23 hours
 }
