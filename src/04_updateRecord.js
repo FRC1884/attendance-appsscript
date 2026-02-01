@@ -39,28 +39,20 @@ function updateProcessEntry(processSheet, cleanData, validSessionRow, isIn) {
 // find all sessions with the name and date
 function findAllSessions(processSheet, name, date, checkExtended) {
   const processLastRow = processSheet.getRange(c.PROCESS_LAST_ROW_CELL[0], c.PROCESS_LAST_ROW_CELL[1]).getValue();
-  formattedDate = Utilities.formatDate(new Date(date), c.TIMEZONE, c.DATE_FORMAT);
 
   const limit = checkExtended ? 1 : Math.max(1, processLastRow - 100);
   const numRows = processLastRow - limit + 1;
 
-  const values = processSheet
-    .getRange(
-      limit,
-      Math.min(c.PROCESS_NAME_COL, c.PROCESS_DATE_COL),
-      numRows,
-      Math.abs(c.PROCESS_NAME_COL - c.PROCESS_DATE_COL) + 1
-    )
-    .getValues();
+  const values = processSheet.getRange(limit, c.PROCESS_NAME_COL, numRows, c.PROCESS_DATE_COL).getValues();
 
-  const nameIndex = c.PROCESS_NAME_COL - Math.min(c.PROCESS_NAME_COL, c.PROCESS_DATE_COL);
-  const dateIndex = c.PROCESS_DATE_COL - Math.min(c.PROCESS_NAME_COL, c.PROCESS_DATE_COL);
+  const nameIndex = 0;
+  const dateIndex = 1;
   const sessions = [];
   let parsedDate = '';
 
   for (let i = values.length - 1; i >= 0; i--) {
     parsedDate = Utilities.formatDate(new Date(values[i][dateIndex]), c.TIMEZONE, c.DATE_FORMAT);
-    if (values[i][nameIndex] == name && parsedDate == formattedDate) {
+    if (values[i][nameIndex] == name && parsedDate == date) {
       sessions.push(limit + i);
     }
   }

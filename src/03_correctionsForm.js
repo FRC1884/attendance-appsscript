@@ -29,12 +29,12 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
     cleanData['time'] = cleanData['If you forgot to sign out, what time did you arrive?'];
   }
 
-  const sessions = findAllSessions(processSheet, cleanData['Name'], cleanData['date'], true);
+  const sessions = findAllSessions(processSheet, cleanData['Name'], cleanData['Session Date'], true);
 
   const { hasValidSession, validSessionRow } = checkSessionValidity(processSheet, sessions, cleanData, isIn);
 
   if (hasValidSession) {
-    updateProcessEntry(processSheet, cleanData, validSessionRow, false)
+    updateProcessEntry(processSheet, cleanData, validSessionRow, isIn)
   } else {
     emailError('update process entry corrections failed', cleanData['time'], cleanData);
   }
