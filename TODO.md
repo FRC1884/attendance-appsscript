@@ -2,7 +2,6 @@
 
 ### Quick / Essential adds: 
 - [ ] add session length calculator to menu
-- [ ] add information to readme about how to update year on year
 
 ### Nice to have (soon): 
 - [ ] refactor corrections form and processing
