@@ -26,7 +26,7 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
     isIn = true;
     cleanData['time'] = cleanData['If you forgot to sign in, what time did you arrive?'];
   } else {
-    cleanData['time'] = cleanData['If you forgot to sign out, what time did you arrive?'];
+    cleanData['time'] = cleanData['If you forgot to sign out, what time did you leave?'];
   }
 
   const sessions = findAllSessions(processSheet, cleanData['Name'], cleanData['Session Date'], true);
@@ -36,7 +36,7 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
   if (hasValidSession) {
     updateProcessEntry(processSheet, cleanData, validSessionRow, isIn)
   } else {
-    emailError('update process entry corrections failed', cleanData['time'], cleanData);
+    emailError(`update process entry corrections failed with difference ${difference}`, cleanData['time'], cleanData);
   }
 }
 

@@ -62,6 +62,8 @@ function findAllSessions(processSheet, name, date, checkExtended) {
 
 // check if a session is valid
 function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
+  let difference = -1;
+  
   for (const session of sessions) {
     let hour = new Date(cleanData['Timestamp']).getHours();
 
@@ -93,6 +95,7 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
       return {
         hasValidSession: true,
         validSessionRow: session,
+        sessionLength: difference,
       };
     }
   }
@@ -100,5 +103,6 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
   return {
     hasValidSession: false,
     validSessionRow: -1,
+    sessionLength: difference,
   };
 }
