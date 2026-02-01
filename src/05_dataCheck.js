@@ -2,15 +2,15 @@
  * Check if the attendance records are complete and send emails if they aren't.
  */
 
-function attemptToCheckResponses() {
+function checkForIncompleteResponses() {
   try {
-    checkForIncompleteResponses();
+    evaluateProcessEntries();
   } catch (err) {
     emailError(err, 'checkForIncompleteResponses', 'n/a');
   }
 }
 
-function checkForIncompleteResponses() {
+function evaluateProcessEntries() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const processSheet = ss.getSheetByName(c.PROCESS_SHEET);
 
