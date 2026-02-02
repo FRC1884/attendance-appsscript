@@ -6,7 +6,7 @@
 function addProcessEntry(processSheet, processLastRow, cleanData, isIn) {
   const nextRow = processLastRow + 1;
 
-  console.log(`logged in ${cleanData['Name']} at ${cleanData['Timestamp']}`);
+  console.log(`logged ${isIn} ${cleanData['Name']} at ${cleanData['Timestamp']}`);
 
   const startCell = `${columnToLetter(c.PROCESS_START_COL)}${nextRow}`;
   const endCell = `${columnToLetter(c.PROCESS_END_COL)}${nextRow}`;

@@ -12,8 +12,8 @@ function evaluateAttendanceFormSubmission(formData) {
     cleanData[key] = formData[key][0];
   }
   const timeAsDate = new Date(cleanData['Timestamp']);
-  cleanData['time'] = Utilities.formatDate(timeAsDate, c.TIMEZONE, 'HH:mm');
-  cleanData['date'] = timeAsDate;
+  cleanData['time'] = Utilities.formatDate(timeAsDate, c.TIMEZONE, c.DURATION_FORMAT);
+  cleanData['date'] = Utilities.formatDate(timeAsDate, c.TIMEZONE, c.DATE_FORMAT);
   const submittedInOut = cleanData['IN/OUT'];
 
   if (submittedInOut == 'IN') {
