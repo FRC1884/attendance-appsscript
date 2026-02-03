@@ -4,7 +4,7 @@ function emailError(err, context, info) {
 
   const emailBody = `There was an error: ${err} <br> 
     context: ${context} <br> \
-    info: ${info}`;
+    info: ${JSON.stringify(info, null, 2)}`;
 
   GmailApp.sendEmail(
     c.ERROR_EMAIL,
