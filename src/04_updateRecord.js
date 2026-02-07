@@ -1,5 +1,5 @@
-/** 
- * This contains the code used to update records. 
+/**
+ * This contains the code used to update records.
  */
 
 // Add an entry to the process sheet
@@ -63,7 +63,7 @@ function findAllSessions(processSheet, name, date, checkExtended) {
 // check if a session is valid
 function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
   let difference = -1;
-  
+
   for (const session of sessions) {
     let hour = new Date(cleanData['Timestamp']).getHours();
 
