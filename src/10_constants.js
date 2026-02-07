@@ -45,7 +45,8 @@ var c = {
 
   // date formatting
   TIMEZONE: 'Europe/London',
-  DATE_FORMAT: 'M/dd',
+  DATE_FORMAT: 'M/d',
+  DATE_FORMAT_TWO: 'M/dd',
   DURATION_FORMAT: 'HH:mm',
   DATE_TIME_FORMAT: 'MM/dd HH:mm',
   DATE_WEEKDAY_FORMAT: 'EEEEE, MMM d',

@@ -36,7 +36,7 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
   if (hasValidSession) {
     updateProcessEntry(processSheet, cleanData, validSessionRow, isIn)
   } else {
-    emailError(`update process entry corrections failed with difference ${difference}`, cleanData['time'], cleanData);
+    emailError(`update process entry corrections failed`, `name: ${cleanData['Name']}, time: ${cleanData['time']}`, cleanData.toString());
   }
 }
 

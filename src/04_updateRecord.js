@@ -48,11 +48,13 @@ function findAllSessions(processSheet, name, date, checkExtended) {
   const nameIndex = 0;
   const dateIndex = 1;
   const sessions = [];
-  let parsedDate = '';
+  let parsedDate, parsedDateAlt = '';
 
   for (let i = values.length - 1; i >= 0; i--) {
     parsedDate = Utilities.formatDate(new Date(values[i][dateIndex]), c.TIMEZONE, c.DATE_FORMAT);
-    if (values[i][nameIndex] == name && parsedDate == date) {
+    parsedDateAlt = Utilities.formatDate(new Date(values[i][dateIndex]), c.TIMEZONE, c.DATE_FORMAT_TWO);
+
+    if (values[i][nameIndex] == name && (parsedDate == date || parsedDateAlt == date)) {
       sessions.push(limit + i);
     }
   }
@@ -65,7 +67,7 @@ function checkSessionValidity(processSheet, sessions, cleanData, isIn) {
   let difference = -1;
 
   for (const session of sessions) {
-    let hour = new Date(cleanData['Timestamp']).getHours();
+    let hour = cleanData['time'] ? new Date(cleanData['time']) : new Date(cleanData['Timestamp']).getHours();
 
     // session time is within an acceptable timeframe (not midnight - 6am)
     if (hour < 6) {
