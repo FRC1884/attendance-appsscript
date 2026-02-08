@@ -24,3 +24,27 @@ function getPreFilledFormLink(name, date, forgot, signInTime, signOutTime) {
 
   return baseUrl+urlName+urlDate+urlForgot+urlSignInTime+urlSignOutTime;
 }
+
+// get session type for the relevant date
+function getSessionType(date) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sessionSheet = ss.getSheetByName(c.SESSIONS_SHEET);
+  const lastRow = sessionSheet.getLastRow();
+  const lastCol = sessionSheet.getLastColumn();
+
+  const rangeValues = sessionSheet.getRange(1, 1, lastRow, lastCol).getDisplayValues();
+  
+  for (let i = 0; i < rangeValues.length; i++) {
+    if (rangeValues[i][0] == date) {
+      return {
+        expectedLength: rangeValues[i][1],
+        sessionType: rangeValues[i][2],
+      }
+    }
+  }
+  
+  return {
+    expectedLength: -1,
+    sessionType: 'bonus',
+  }
+}

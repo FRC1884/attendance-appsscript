@@ -11,11 +11,13 @@ function addProcessEntry(processSheet, processLastRow, cleanData, isIn) {
   const startCell = `${columnToLetter(c.PROCESS_START_COL)}${nextRow}`;
   const endCell = `${columnToLetter(c.PROCESS_END_COL)}${nextRow}`;
   const lenFormula = `=IF(AND(${startCell}<>"", ${endCell}<>""), ${endCell}-${startCell}, "")`;
+  const { expectedLength, sessionType } = getSessionType(cleanData['date']);
 
   processSheet.getRange(nextRow, c.PROCESS_NAME_COL).setValue(cleanData['Name']);
   processSheet.getRange(nextRow, c.PROCESS_DATE_COL).setValue(cleanData['date']).setNumberFormat(c.DATE_FORMAT);
   processSheet.getRange(nextRow, c.PROCESS_LEN_COL).setFormula(lenFormula);
   processSheet.getRange(nextRow, c.PROCESS_STATUS_COL).setValue(c.SessionStatus.Pending);
+  processSheet.getRange(nextRow, c.PROCESS_SESSION_TYPE_COL).setValue(sessionType);
 
   if (isIn) {
     processSheet.getRange(nextRow, c.PROCESS_START_COL).setValue(cleanData['time']);
