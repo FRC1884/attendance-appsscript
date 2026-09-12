@@ -53,7 +53,7 @@ Also add the following values:
 
 Cell J1:
 - This cell contains the last row which should be checked by the attendance script, so all entries above will remain unchanged. 
-- Formula: `formula to be added`. 
+- Formula: `=IFERROR(IFERROR(MATCH("email sent", F:F, 0), MATCH("pending", F:F, 0))-1, ROWS(FILTER(A:A, NOT(ISBLANK(A:A)))))`. 
 
 Cell L1: 
 - This cell contains the last row with an entry. 
@@ -77,9 +77,9 @@ Add the Script IDs to Github under Settings -> Secrets and Variables -> Variable
 
 You may also have to update the secret `CLASPRC_SECRET`. To find the value, run `clasp login` in the terminal followed by `cat ~/.clasprc.json`. Copy that value into the secret. This will allow the Github action to push code to the Apps Script Project. 
 
-Update the Google Form link in [14_utils.js](./src/14_utils.js). Generate a pre-filled form and update the constants in the `getPreFilledFormLink` function. 
+Update the Google Form link in [14_utils.js](./src/14_utils.js). Generate a pre-filled Corrections form and update the constants in the `getPreFilledFormLink` function. 
 
-Update the corrections email in [10_constants.js](./src/10_constants.js). This is the email that will be notified whenever there is an error in the project. 
+Update the `ERROR_EMAIL` in [10_constants.js](./src/10_constants.js). This is the email that will be notified whenever there is an error in the project. 
 
 ## Deploy scripts
 

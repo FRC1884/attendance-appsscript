@@ -15,12 +15,12 @@ function getPreFilledFormLink(name, date, forgot, signInTime, signOutTime) {
   const formattedSignInTime = signInTime.length == 4 ? '0'+signInTime : signInTime;
   const formattedSignOutTime = signOutTime.length == 4 ? '0'+signOutTime : signOutTime;
 
-  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSffFp_IC9zxuL6Z1H4vnJ0qfIX0aNW5rntJektpyV-Vqns0XQ/viewform?usp=pp_url';
-  const urlName = `&entry.611374195=${encodeURIComponent(name).replace(/%20/g, "+")}`;
-  const urlDate = `&entry.469414620=${Utilities.formatDate(date, c.TIMEZONE, c.DATE_GOOGLE_FORM_FORMAT)}`;
-  const urlForgot = `&entry.2022018068=${encodeURIComponent(forgotFormatted).replace(/%20/g, "+")}`;
-  const urlSignInTime = signInTime ? `&entry.1007118312=${formattedSignInTime}` : '';
-  const urlSignOutTime = signOutTime ? `&entry.1429947177=${formattedSignOutTime}` : '';
+  const baseUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeQRCLRUty7X9Lu-hUDHe5PoVrT1asJXDFA3hTM1pCqwThA7g/viewform?usp=pp_url';
+  const urlName = `&entry.1989714821=${encodeURIComponent(name).replace(/%20/g, "+")}`;
+  const urlDate = `&entry.618312039=${Utilities.formatDate(date, c.TIMEZONE, c.DATE_GOOGLE_FORM_FORMAT)}`;
+  const urlForgot = `&entry.1837039774=${encodeURIComponent(forgotFormatted).replace(/%20/g, "+")}`;
+  const urlSignInTime = signInTime ? `&entry.44185224=${formattedSignInTime}` : '';
+  const urlSignOutTime = signOutTime ? `&entry.413406831=${formattedSignOutTime}` : '';
 
   return baseUrl+urlName+urlDate+urlForgot+urlSignInTime+urlSignOutTime;
 }
