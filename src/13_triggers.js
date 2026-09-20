@@ -14,7 +14,7 @@ function createOnFormSubmitTrigger() {
 
 // This trigger happens every day between 7-8am
 function createIncompleteResponseCheckTrigger() {
-  ScriptApp.newTrigger('attemptToCheckResponses')
+  ScriptApp.newTrigger('checkForIncompleteResponses')
     .timeBased()
     .atHour(7)
     .everyDays(1)

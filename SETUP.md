@@ -26,7 +26,7 @@ The code to run the above is in this repo. There are also a few things which nee
 
 ## Google Forms
 
-You need to create two Google Forms, one for attendance, and one for corrections. Copy the ones from the previous year. Link them both with the Google Sheet and name those sheets 'Data' and 'Corrections'. 
+You need to create two Google Forms, one for attendance, and one for corrections. Copy the ones from the previous year. Link them both with the Google Sheet and name those sheets 'Data' and 'Corrections'. Make sure these are identical to previous seasons! Questions must be the same (no trailing spaces) and formats must be the same (eg. month/date instead of month/date/year). 
 
 ## Google Sheets
 
