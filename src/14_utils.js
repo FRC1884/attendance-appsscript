@@ -48,3 +48,9 @@ function getSessionType(date) {
     sessionType: 'bonus',
   }
 }
+
+function switchAMPM(timeString) {
+  return timeString.replace(/AM|PM/i, match =>
+    match.toUpperCase() === "AM" ? "PM" : "AM"
+  );
+}

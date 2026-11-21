@@ -35,9 +35,24 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
 
   if (hasValidSession) {
     updateProcessEntry(processSheet, cleanData, validSessionRow, isIn)
-  } else {
-    emailError(`update process entry corrections failed`, `name: ${cleanData['Name']}, time: ${cleanData['time']}`, cleanData.toString());
+    return;
+  } 
+  
+  // check if the session would be valid if the time was swapped
+  cleanDataSwitched = { ...cleanData };
+  cleanDataSwitched['time'] = switchAMPM(cleanData['time']);
+  const {
+    hasValidSession: hasValidSwitchedSession,
+    validSessionRow: validSwitchedSessionRow
+  } = checkSessionValidity(processSheet, sessions, cleanDataSwitched, isIn);
+
+  if (hasValidSwitchedSession) {
+    updateProcessEntry(processSheet, cleanDataSwitched, validSwitchedSessionRow, isIn)
+    return;
   }
+
+  // entry not found, email with error
+  emailError(`update process entry corrections failed`, `name: ${cleanData['Name']}, time: ${cleanData['time']}`, cleanData.toString());
 }
 
 function addFullEntry(processSheet, cleanData) {
