@@ -55,6 +55,7 @@ function updateProcessEntryCorrections(processSheet, cleanData) {
   emailError(`update process entry corrections failed`, `name: ${cleanData['Name']}, time: ${cleanData['time']}`, cleanData.toString());
 }
 
+// If someone says they forgot to both sign in and sign out
 function addFullEntry(processSheet, cleanData) {
   const processLastRow = processSheet.getRange(c.PROCESS_LAST_ROW_CELL[0], c.PROCESS_LAST_ROW_CELL[1]).getValue();
   const nextRow = processLastRow + 1;
@@ -81,6 +82,9 @@ function addFullEntry(processSheet, cleanData) {
 
   processSheet.getRange(nextRow, c.PROCESS_START_COL).setValue(signInTime);
   processSheet.getRange(nextRow, c.PROCESS_END_COL).setValue(signOutTime);
+
+  const { expectedLength, sessionType } = getSessionType(cleanData['Session Date']);
+  processSheet.getRange(nextRow, c.PROCESS_SESSION_TYPE_COL).setValue(sessionType);
 
   console.log(`added full corrections entry for ${cleanData['Name']} at ${cleanData['Timestamp']}`);
 }
